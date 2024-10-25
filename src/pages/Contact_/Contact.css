@@ -1,0 +1,37 @@
+.contact-section {
+  padding: 80px 0;
+  background-color: #f4f4f4;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, textarea, select {
+  padding: 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: 'NeueHaas', sans-serif;
+}
+
+input:focus {
+  border-color: #52b788;
+}
+
+textarea:focus {
+  border-color: #52b788;
+}
+
+select:focus {
+  border-color: #52b788;
+}
