@@ -1,0 +1,32 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main  # Aciona o deploy ao fazer push na branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm run build  # Gera a build para produção
+
+      - name: Deploy to Hostinger
+        env:
+          HOST: ${{ secrets.HOSTINGER_HOST }}
+          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+
+        run: |
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "
+            rm -rf ~/public_html/* &&  # Limpa arquivos antigos
+            mkdir -p ~/public_html &&  # Garante que a pasta existe
+            scp -r ./build/* $USERNAME@$HOST:~/public_html  # Copia os novos arquivos
+          "
