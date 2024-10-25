@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-scroll';
 import logo from '../../assets/logo.png';
 import './Navbar.css';
-import { FaBars } from 'react-icons/fa';
 
 const Navbar: React.FC = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
     <nav className="navbar">
       <div className="logo">
