@@ -15,8 +15,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
-          npm run build  # Gera a build para produção
+          yarn install
+          yarn run build  # Gera a build para produção
 
       - name: Deploy to Hostinger
         env:
