@@ -29,7 +29,7 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USERNAME@$HOST "
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p 65002 $USERNAME@$HOST "
             rm -rf ~/public_html/* &&
             mkdir -p ~/public_html &&
             scp -r ./build/* $USERNAME@$HOST:~/public_html
