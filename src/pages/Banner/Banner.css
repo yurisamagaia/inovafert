@@ -1,0 +1,62 @@
+.parallax-banner {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-left: 50px;
+}
+
+.parallax-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../assets/Banner.png');
+  background-attachment: fixed; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.banner-content h1 {
+  font-size: 60px;
+  margin: 0;
+  color: #40916c;
+}
+
+.banner-content h2 {
+  font-size: 50px;
+  margin: 0;
+  color: #333;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .parallax-banner::before {
+    background-attachment: scroll;
+    opacity: 0.6;
+  }
+
+  .banner-content {
+    padding-bottom: 50px;
+  }
+
+  .banner-content h1 {
+    font-size: 30px;
+  }
+
+  .banner-content h2 {
+    font-size: 24px;
+  }
+
+}
