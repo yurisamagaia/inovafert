@@ -25,8 +25,12 @@ jobs:
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
 
         run: |
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$HOST "
-            rm -rf ~/public_html/* &&  # Limpa arquivos antigos
-            mkdir -p ~/public_html &&  # Garante que a pasta existe
-            scp -r ./build/* $USERNAME@$HOST:~/public_html  # Copia os novos arquivos
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa $USERNAME@$HOST "
+            rm -rf ~/public_html/* &&
+            mkdir -p ~/public_html &&
+            scp -r ./build/* $USERNAME@$HOST:~/public_html
           "
