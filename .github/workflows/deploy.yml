@@ -32,6 +32,6 @@ jobs:
           PORT: ${{ secrets.HOSTINGER_PORT }}
         run: |
           
-          scp -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "chmod -R 755 ~/public_html"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "ls -la ~/public_html"
