@@ -1,0 +1,38 @@
+name: Build and Deploy to Branch
+
+on:
+  push:
+    branches:
+      - main  # Aciona o build a cada push na branch main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout do código-fonte
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Instalação do Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Step 3: Instalação das dependências
+      - name: Install dependencies
+        run: yarn install
+
+      # Step 4: Gerar o build do projeto
+      - name: Build the project
+        run: yarn build
+
+      - name: Push build to deploy branch
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B build
+          git add -f build/
+          git commit -m "Deploy build to Hostinger"
+          git push origin build --force
