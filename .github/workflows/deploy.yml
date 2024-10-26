@@ -1,3 +1,4 @@
+
 name: Deploy to Hostinger
 
 on:
@@ -26,6 +27,12 @@ jobs:
       - name: Build the React app
         run: yarn build
 
-      # Deploy para a Hostinger via SSH
-      - name: Deploy to Hostinger via SCP
-        run: scp -r -o StrictHostKeyChecking=no -p 65002 build/* u406371424@185.173.111.77:~/public_html
+      # Configurar chave SSH
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.HOSTINGER_SSH_KEY }}
+
+      # Deploy via rsync
+      - name: Deploy to Hostinger via rsync
+        run: rsync -avz -e "ssh -o StrictHostKeyChecking=no" build/ u406371424@185.173.111.77:~/public_html
