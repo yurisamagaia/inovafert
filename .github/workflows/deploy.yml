@@ -1,9 +1,9 @@
-name: Deploy to Hostinger
+name: Deploy
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger the deployment when pushing to the main branch
 
 jobs:
   deploy:
@@ -15,15 +15,31 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
-          yarn build
+          yarn install  # Install dependencies
+          yarn build    # Generate prod build
 
-      - name: Set up SSH key
+      - name: Deploy
+        env:
+          HOST: ${{ secrets.HOSTINGER_HOST }}
+          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          PORT: ${{ secrets.HOSTINGER_PORT }}
+
         run: |
+          # Configure SSH key
           mkdir -p ~/.ssh
-          printf "%s" "$HOSTINGER_SSH_KEY" > ~/.ssh/id_rsa
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
-      - name: Deploy to Hostinger
-        run: |
+          # Test SSH connection
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "echo Conexão SSH estabelecida."
+
+          # Remove old files and upload new version
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "
+            rm -rf ~/public_html/* &&
+            mkdir -p ~/public_html
+          "
+
+          # Transfer build to server
+      
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P 65002 -r ./build/* u406371424@185.173.111.77:~/public_html
