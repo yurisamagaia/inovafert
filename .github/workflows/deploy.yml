@@ -1,9 +1,9 @@
-name: Generate a build and push to another branch
+name: Deploy do Hostinger
 
 on:
   push:
     branches:
-      - main # The branch name your are commit the new changes
+      - main # Branch name with commit changes
 
 jobs:
   build:
@@ -17,13 +17,13 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build # The build command of your project
+        run: yarn build
 
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: build # The branch name where you want to push the assets
-          FOLDER: build # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+          BRANCH: build # Branch name to push the assets
+          FOLDER: build # Directory where assets are generated
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}" # Commit message
