@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.5c4dba13.css",
+    "main.js": "/static/js/main.808d7ba4.js",
+    "static/js/453.bc972363.chunk.js": "/static/js/453.bc972363.chunk.js",
+    "static/media/Banner.png": "/static/media/Banner.f2a4958952054df7b162.png",
+    "static/media/Abraco.png": "/static/media/Abraco.9fe90cf70b5f92eaa716.png",
+    "static/media/NeueHaasDisplayRoman.ttf": "/static/media/NeueHaasDisplayRoman.a4c6f6d97398d8f9a96c.ttf",
+    "static/media/Leticia.png": "/static/media/Leticia.a7a8a80051386417da3e.png",
+    "static/media/Crislaine.png": "/static/media/Crislaine.8accad44f28eeee67925.png",
+    "static/media/LogoFooter.png": "/static/media/LogoFooter.b3f10c081dbbee973408.png",
+    "static/media/LogoSeparator.png": "/static/media/LogoSeparator.0ef6e5cb9d39d5e1ce80.png",
+    "static/media/logo.png": "/static/media/logo.c7a23a71a47c3f111d05.png",
+    "index.html": "/index.html",
+    "main.5c4dba13.css.map": "/static/css/main.5c4dba13.css.map",
+    "main.808d7ba4.js.map": "/static/js/main.808d7ba4.js.map",
+    "453.bc972363.chunk.js.map": "/static/js/453.bc972363.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c4dba13.css",
+    "static/js/main.808d7ba4.js"
+  ]
+}
