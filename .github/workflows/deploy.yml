@@ -21,7 +21,7 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "$HOSTINGER_SSH_KEY" > ~/.ssh/id_rsa
+          printf "%s" "$HOSTINGER_SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Deploy to Hostinger
