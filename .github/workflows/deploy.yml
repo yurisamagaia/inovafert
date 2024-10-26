@@ -32,30 +32,6 @@ jobs:
           PORT: ${{ secrets.HOSTINGER_PORT }}
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "echo Conexão SSH estabelecida."
-
-      - name: Transfer build to server
-        env:
-          HOST: ${{ secrets.HOSTINGER_HOST }}
-          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          PORT: ${{ secrets.HOSTINGER_PORT }}
-        run: |
           scp -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
-
-      - name: Set permissions for public_html
-        env:
-          HOST: ${{ secrets.HOSTINGER_HOST }}
-          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          PORT: ${{ secrets.HOSTINGER_PORT }}
-        run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "chmod -R 755 ~/public_html"
-
-      - name: List files in public_html
-        env:
-          HOST: ${{ secrets.HOSTINGER_HOST }}
-          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          PORT: ${{ secrets.HOSTINGER_PORT }}
-        run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "ls -la ~/public_html"
