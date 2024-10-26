@@ -23,7 +23,7 @@ jobs:
           HOST: ${{ secrets.HOSTINGER_HOST }}
           USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          PORT: ${{ secrets.HOSTINGER_PORT }}  # Porta SSH (se não for a padrão)
+          PORT: ${{ secrets.HOSTINGER_PORT }}
 
         run: |
           # Configure SSH key
