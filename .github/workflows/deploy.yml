@@ -28,4 +28,4 @@ jobs:
 
       # Deploy para a Hostinger via SSH
       - name: Deploy to Hostinger via SCP
-        run: scp -r -o StrictHostKeyChecking=no build/* u406371424@185.173.111.77:~/public_html
+        run: scp -r -o StrictHostKeyChecking=no -p 65002 build/* u406371424@185.173.111.77:~/public_html
