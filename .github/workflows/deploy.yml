@@ -28,6 +28,12 @@ jobs:
       - name: Build the project
         run: yarn build
 
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+      
+
       - name: Push build to deploy branch
         run: |
           git config --global user.name "github-actions[bot]"
