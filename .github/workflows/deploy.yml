@@ -21,7 +21,7 @@ jobs:
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          printf "%s" "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
       - name: Test SSH connection
@@ -31,7 +31,7 @@ jobs:
           SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
           PORT: ${{ secrets.HOSTINGER_PORT }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "echo Conexão SSH estabelecida."
+          
           scp -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "chmod -R 755 ~/public_html"
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "ls -la ~/public_html"
