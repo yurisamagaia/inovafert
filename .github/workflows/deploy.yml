@@ -20,7 +20,7 @@ jobs:
 
       - name: Clean public_html directory
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p 65002 u406371424@185.173.111.77 "rm -rf ~/public_html/*"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "rm -rf ~/public_html/*"
 
       - name: Deploy
         env:
