@@ -6,32 +6,32 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      # Checkout do código-fonte
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          yarn install
-          yarn build
-
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          printf "%s" "$SSH_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-      - name: Test SSH connection
-        env:
-          HOST: ${{ secrets.HOSTINGER_HOST }}
-          USERNAME: ${{ secrets.HOSTINGER_USERNAME }}
-          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          PORT: ${{ secrets.HOSTINGER_PORT }}
-        run: |
+      # Instalação das dependências do Node.js e build
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
           
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "chmod -R 755 ~/public_html"
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "ls -la ~/public_html"
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build the React app
+        run: yarn build
+
+      # Configurar chave SSH
+      - name: Add SSH key
+        uses: webfactory/ssh-agent@v0.8.1
+        with:
+          ssh-private-key: ${{ secrets.HOSTINGER_SSH_KEY }}
+
+      # Deploy para a Hostinger via SSH
+      - name: Deploy to Hostinger via SCP
+        run: scp -r -o StrictHostKeyChecking=no build/* u406371424@185.173.111.77:~/public_html
