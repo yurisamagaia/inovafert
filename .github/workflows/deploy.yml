@@ -3,7 +3,7 @@ name: Deploy do Hostinger
 on:
   push:
     branches:
-      - main # Branch name with commit changes
+      - main # Branch with commit changes
 
 jobs:
   build:
