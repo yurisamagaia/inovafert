@@ -18,10 +18,6 @@ jobs:
           yarn install  # Install dependencies
           yarn build    # Generate prod build
 
-      - name: Clean public_html directory
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p ${PORT:-22} $USERNAME@$HOST "rm -rf ~/public_html/*"
-
       - name: Deploy
         env:
           HOST: ${{ secrets.HOSTINGER_HOST }}
@@ -45,4 +41,4 @@ jobs:
           "
 
           # Transfer build to server
-          scp -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
+          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
