@@ -17,6 +17,7 @@ jobs:
         run: |
           yarn install  # Install dependencies
           yarn build    # Generate prod build
+          
 
       - name: Deploy
         env:
@@ -28,7 +29,7 @@ jobs:
         run: |
           # Configure SSH key
           mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          printf "%s" "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
           # Test SSH connection
@@ -42,3 +43,6 @@ jobs:
 
           # Transfer build to server
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -P ${PORT:-22} -r ./build/* $USERNAME@$HOST:~/public_html
+
+          ls -la ~/.ssh
+
