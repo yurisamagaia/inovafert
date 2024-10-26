@@ -3,7 +3,7 @@ name: Deploy to Hostinger
 on:
   push:
     branches:
-      - main  # Aciona o deploy ao fazer push na branch main
+      - main
 
 jobs:
   deploy:
@@ -17,6 +17,12 @@ jobs:
         run: |
           yarn install
           yarn build
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$HOSTINGER_SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
 
       - name: Deploy to Hostinger
         run: |
