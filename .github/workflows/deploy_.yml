@@ -1,0 +1,41 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          yarn install
+          yarn build
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa 65002 u406371424@185.173.111.77 "echo Conexão SSH estabelecida."
+
+      - name: Transfer build to server
+        run: |
+          scp -v -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa 65002 -r ./build/* u406371424@185.173.111.77:~/public_html
+
+      - name: Set permissions for public_html
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa 65002 u406371424@185.173.111.77 "chmod -R 755 ~/public_html"
+
+      - name: List files in public_html
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa 65002 u406371424@185.173.111.77 "ls -la ~/public_html"
