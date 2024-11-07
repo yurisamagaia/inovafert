@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.css": "/static/css/main.9bef216d.css",
+    "main.css": "/static/css/main.82d92038.css",
     "main.js": "/static/js/main.808d7ba4.js",
     "static/js/453.bc972363.chunk.js": "/static/js/453.bc972363.chunk.js",
+    "static/media/Banner2.png": "/static/media/Banner2.18b2ce4a0dfd33582d06.png",
     "static/media/Banner.png": "/static/media/Banner.f2a4958952054df7b162.png",
     "static/media/Abraco.png": "/static/media/Abraco.9fe90cf70b5f92eaa716.png",
     "static/media/NeueHaasDisplayRoman.ttf": "/static/media/NeueHaasDisplayRoman.a4c6f6d97398d8f9a96c.ttf",
@@ -12,12 +13,12 @@
     "static/media/LogoSeparator.png": "/static/media/LogoSeparator.0ef6e5cb9d39d5e1ce80.png",
     "static/media/logo.png": "/static/media/logo.c7a23a71a47c3f111d05.png",
     "index.html": "/index.html",
-    "main.9bef216d.css.map": "/static/css/main.9bef216d.css.map",
+    "main.82d92038.css.map": "/static/css/main.82d92038.css.map",
     "main.808d7ba4.js.map": "/static/js/main.808d7ba4.js.map",
     "453.bc972363.chunk.js.map": "/static/js/453.bc972363.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9bef216d.css",
+    "static/css/main.82d92038.css",
     "static/js/main.808d7ba4.js"
   ]
 }
