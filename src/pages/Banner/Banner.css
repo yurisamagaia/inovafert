@@ -42,9 +42,18 @@
 }
 
 @media (max-width: 768px) {
+  .parallax-banner {
+    padding-left: 0;
+  }
+  .banner-content {
+    text-align: center;
+    margin: 0 auto;
+  }
+
   .parallax-banner::before {
     background-attachment: scroll;
     opacity: 0.6;
+    background-image: url('../../assets/Banner2.png');
   }
 
   .banner-content {
